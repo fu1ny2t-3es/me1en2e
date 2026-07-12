@@ -18,7 +18,7 @@ void Gsu::STOP()
 	_state.SFR.Running = false;
 	ResetFlags();
 
-	_state.R[(0x301F >> 1) & 0x0F] = 0;
+	_state.R[(0x301F >> 1) & 0x0F] = 0xFFFF;
 
 	UpdateRunningState();
 }
