@@ -535,23 +535,8 @@ uint8_t Gsu::Read(uint32_t addr)
 			return (uint8_t)_state.R[(addr >> 1) & 0x0F];
 
 		case 0x3001: case 0x3003: case 0x3005: case 0x3007: case 0x3009: case 0x300B: case 0x300D:case 0x300F:
-		case 0x3011: case 0x3013: case 0x3015: case 0x3017: case 0x3019: case 0x301B: case 0x301D:
+		case 0x3011: case 0x3013: case 0x3015: case 0x3017: case 0x3019: case 0x301B: case 0x301D:case 0x301F:
 			return _state.R[(addr >> 1) & 0x0F] >> 8;
-
-		case 0x301F:
-			if (_state.R[(addr >> 1) & 0x0F] != 0)
-				return _state.R[(addr >> 1) & 0x0F] >> 8;
-			else {
-				static int flip = 0;
-				if(flip < 1) {
-					flip++;
-					return 1;
-				}
-				else {
-					flip = 0;
-					return 0;
-				}
-			}
 
 		case 0x3030: return _state.SFR.GetFlagsLow();
 		case 0x3031: {
