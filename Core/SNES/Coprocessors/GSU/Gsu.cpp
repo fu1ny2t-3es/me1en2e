@@ -532,7 +532,7 @@ uint8_t Gsu::Read(uint32_t addr)
 				return _state.R[(addr >> 1) & 0x0F] >> 8;
 			else {
 				static int flip = 0;
-				if(flip == 0) {
+				if(flip < 5) {
 					flip++;
 					return 1;
 				}
