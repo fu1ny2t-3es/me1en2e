@@ -31,7 +31,6 @@ Gsu::Gsu(SnesConsole* console, uint32_t gsuRamSize, bool isFx3)
 	_state.Fx3 = isFx3;
 =======
 	_clockMultiplier = std::max(1u, _settings->GetSnesConfig().GsuClockSpeed / 100);
-	_clockMultiplier = 1000000;
 
 	_state = {};
 >>>>>>> 7a898430 (Update Gsu.cpp)
@@ -152,7 +151,8 @@ void Gsu::Run()
 {
 	uint64_t targetCycle = _memoryManager->GetMasterClock() * _clockMultiplier;
 
-	while(!_stopped && _state.CycleCount < targetCycle) {
+	//while(!_stopped && _state.CycleCount < targetCycle) {
+	while(!_stopped) {
 		Exec();
 	}
 
@@ -543,7 +543,7 @@ uint8_t Gsu::Read(uint32_t addr)
 				return _state.R[(addr >> 1) & 0x0F] >> 8;
 			else {
 				static int flip = 0;
-				if(flip < 3) {
+				if(flip < 1) {
 					flip++;
 					return 1;
 				}
