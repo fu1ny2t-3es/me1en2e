@@ -534,7 +534,7 @@ uint8_t Gsu::Read(uint32_t addr)
 				static int flip = 0;
 				if(flip < 5) {
 					flip++;
-					return 1;
+					return 0;
 				}
 				else {
 					flip = 0;
