@@ -1,0 +1,51 @@
+name: Build Mesen
+
+on: [push, workflow_dispatch]
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
+jobs:
+  windows:
+    strategy:
+      matrix:
+        platform: [
+          {netversion: 10.x, targetframework: net10.0, aot: false, singleFile: true, aotString: ""},
+          {netversion: 10.x, targetframework: net10.0, aot: true, singleFile: false, aotString: " - AoT"}
+        ]
+      fail-fast: false
+    runs-on: windows-2025-vs2026
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ matrix.platform.netversion }}
+
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v3
+        with:
+          msbuild-architecture: x64
+
+      - name: Restore packages
+        run: dotnet restore -p:TargetFramework="${{ matrix.platform.targetframework }}" -r win-x64 -p:PublishAot="${{ matrix.platform.aot }}" -p:BuildWithNetFrameworkHostedCompiler=true
+
+      - name: Write commit SHA1 to file
+        uses: ./.github/actions/build-sha1-action
+
+      - name: Build Mesen
+        run: msbuild -nologo -v:d -clp:ForceConsoleColor -m -p:Configuration=Release -p:Platform=x64 -t:Clean,UI -p:TargetFramework="${{ matrix.platform.targetframework }}" -p:OptimizeUi="true"
+
+      - name: Upload Mesen
+        uses: actions/upload-artifact@v7
+        if: github.event_name != 'pull_request'
+        with:
+          name: Mesen (Windows - ${{ matrix.platform.targetframework }}${{ matrix.platform.aotString }})
+          path: |
+            build/TmpReleaseBuild/Mesen.exe
