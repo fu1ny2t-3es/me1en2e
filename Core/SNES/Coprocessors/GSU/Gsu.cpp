@@ -374,7 +374,11 @@ uint8_t Gsu::ReadProgramByte(MemoryOperationType opType)
 		_emu->ProcessMemoryRead<CpuType::Gsu>(_lastOpAddr, _cache[cacheAddr], opType);
 		return _cache[cacheAddr];
 	} else {
+<<<<<<< HEAD
 		if(_state.ProgramBank <= _maxPrgRomBank) {
+=======
+		if(_state.ProgramBank <= 0x6F) {
+>>>>>>> adc1433a (Update Gsu.cpp)
 			WaitRomOperation();
 			WaitForRomAccess();
 		} else {
