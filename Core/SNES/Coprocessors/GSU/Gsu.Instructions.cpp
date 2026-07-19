@@ -18,6 +18,8 @@ void Gsu::STOP()
 	_state.SFR.Running = false;
 	ResetFlags();
 
+	_state.R[(0x301F >> 1) & 0x0F] = 0;
+
 	UpdateRunningState();
 }
 
@@ -742,6 +744,7 @@ uint8_t Gsu::GetColor(uint8_t value)
 
 	return value;
 }
+<<<<<<< HEAD
 
 void Gsu::ClearCharFx3(uint16_t offset)
 {
@@ -788,3 +791,5 @@ void Gsu::ProcessCommandFx3()
 			break;
 	}
 }
+=======
+>>>>>>> 58dd5a0b (Update Gsu.Instructions.cpp)
