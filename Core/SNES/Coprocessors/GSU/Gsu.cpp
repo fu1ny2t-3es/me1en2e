@@ -66,11 +66,21 @@ Gsu::Gsu(SnesConsole* console, uint32_t gsuRamSize, bool isFx3)
 		}
 =======
 	for(int i = 0; i < 0x3F; i++) {
+<<<<<<< HEAD
 		cpuMappings->RegisterHandler(i, i, 0x6000, 0x7FFF, this);
 		cpuMappings->RegisterHandler(i + 0x80, i + 0x80, 0x6000, 0x7FFF, this);
 >>>>>>> 721a6f68 (Update Gsu.cpp)
 	}
 
+=======
+		cpuMappings->RegisterHandler(i, i, 0x6000, 0x7FFF, _gsuCpuRamHandlers);
+		cpuMappings->RegisterHandler(i + 0x80, i + 0x80, 0x6000, 0x7FFF, _gsuCpuRamHandlers);
+	}
+
+	cpuMappings->RegisterHandler(0x00, 0x3F, 0x7000, 0x7FFF, this);
+	cpuMappings->RegisterHandler(0x80, 0xBF, 0x7000, 0x7FFF, this);
+
+>>>>>>> 8f281010 (Update Gsu.cpp)
 	cpuMappings->RegisterHandler(0x70, 0x71, 0x0000, 0xFFFF, _gsuCpuRamHandlers);
 <<<<<<< HEAD
 	if(!isFx3) {
