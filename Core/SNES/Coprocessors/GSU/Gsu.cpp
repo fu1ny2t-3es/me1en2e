@@ -79,8 +79,13 @@ Gsu::Gsu(SnesConsole* console, uint32_t gsuRamSize, bool isFx3)
 	cpuMappings->RegisterHandler(0x00, 0x3F, 0x8000, 0xFFFF, _gsuCpuRomHandlers);
 	cpuMappings->RegisterHandler(0x80, 0xBF, 0x8000, 0xFFFF, _gsuCpuRomHandlers);
 
+<<<<<<< HEAD
 	cpuMappings->RegisterHandler(0x40, _maxPrgRomBank, 0x0000, 0xFFFF, _gsuCpuRomHandlers);
 	cpuMappings->RegisterHandler(0xC0, maxPrgRomBankH, 0x0000, 0xFFFF, _gsuCpuRomHandlers);
+=======
+	cpuMappings->RegisterHandler(0x40, 0x6F, 0x0000, 0xFFFF, _gsuCpuRomHandlers);
+	cpuMappings->RegisterHandler(0xC0, 0xFF, 0x0000, 0xFFFF, _gsuCpuRomHandlers);
+>>>>>>> 2b035501 (Update Gsu.cpp)
 
 	//GSU mappings
 	_mappings.RegisterHandler(0x00, 0x3F, 0x8000, 0xFFFF, prgRomHandlers);
