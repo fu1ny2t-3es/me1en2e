@@ -24,7 +24,18 @@ Gsu::Gsu(SnesConsole* console, uint32_t gsuRamSize, bool isFx3)
 	_cpu = console->GetCpu();
 	_settings = _emu->GetSettings();
 
+<<<<<<< HEAD
 	_isFx3 = isFx3;
+=======
+<<<<<<< HEAD
+	_state.Fx3 = isFx3;
+=======
+	_clockMultiplier = std::max(1u, _settings->GetSnesConfig().GsuClockSpeed / 100);
+	_clockMultiplier = 1000000;
+
+	_state = {};
+>>>>>>> 7a898430 (Update Gsu.cpp)
+>>>>>>> f49324f7 (Update Gsu.cpp)
 	_state.ProgramReadBuffer = 0x01; //Run a NOP on first cycle
 
 	UpdateClockMultiplier();
