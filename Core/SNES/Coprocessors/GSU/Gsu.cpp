@@ -101,6 +101,25 @@ Gsu::Gsu(SnesConsole* console, uint32_t gsuRamSize, bool isFx3)
 >>>>>>> 64d089c6 (Update Gsu.cpp)
 	}
 
+<<<<<<< HEAD
+=======
+	cpuMappings->RegisterHandler(0x70, 0x71, 0x0000, 0xFFFF, _gsuCpuRamHandlers);
+	if(!isFx3) {
+		cpuMappings->RegisterHandler(0xF0, 0xF1, 0x0000, 0xFFFF, _gsuCpuRamHandlers);
+	}
+
+	cpuMappings->RegisterHandler(0x00, 0x3F, 0x8000, 0xFFFF, _gsuCpuRomHandlers);
+	cpuMappings->RegisterHandler(0x80, 0xBF, 0x8000, 0xFFFF, _gsuCpuRomHandlers);
+
+<<<<<<< HEAD
+	cpuMappings->RegisterHandler(0x40, _maxPrgRomBank, 0x0000, 0xFFFF, _gsuCpuRomHandlers);
+	cpuMappings->RegisterHandler(0xC0, maxPrgRomBankH, 0x0000, 0xFFFF, _gsuCpuRomHandlers);
+=======
+	cpuMappings->RegisterHandler(0x40, 0x6F, 0x0000, 0xFFFF, _gsuCpuRomHandlers);
+	cpuMappings->RegisterHandler(0xC0, 0xFF, 0x0000, 0xFFFF, _gsuCpuRomHandlers);
+>>>>>>> 2b035501 (Update Gsu.cpp)
+
+>>>>>>> 202f7186 (Update Gsu.cpp)
 	//GSU mappings
 	_mappings.RegisterHandler(0x00, 0x3F, 0x8000, 0xFFFF, prgRomHandlers);
 	_mappings.RegisterHandler(0x00, 0x3F, 0x0000, 0x7FFF, prgRomHandlers); //Mirror
