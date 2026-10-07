@@ -67,10 +67,12 @@ Gsu::Gsu(SnesConsole* console, uint32_t gsuRamSize, bool isFx3)
 		cpuMappings->RegisterHandler(0x00, 0x3F, 0x3000, 0x3FFF, this);
 		cpuMappings->RegisterHandler(0x80, 0xBF, 0x3000, 0x3FFF, this);
 
+<<<<<<< HEAD
 		for(int i = 0; i < 0x3F; i++) {
 			cpuMappings->RegisterHandler(i, i, 0x6000, 0x7FFF, _gsuCpuRamHandlers);
 			cpuMappings->RegisterHandler(i + 0x80, i + 0x80, 0x6000, 0x7FFF, _gsuCpuRamHandlers);
 		}
+<<<<<<< HEAD
 		cpuMappings->RegisterHandler(0x70, 0x71, 0x0000, 0xFFFF, _gsuCpuRamHandlers);
 
 		cpuMappings->RegisterHandler(0x00, 0x3F, 0x8000, 0xFFFF, _gsuCpuRomHandlers);
@@ -90,13 +92,24 @@ Gsu::Gsu(SnesConsole* console, uint32_t gsuRamSize, bool isFx3)
 				cpuMappings->RegisterHandler(0xC0, 0xFF, 0x0000, 0xFFFF, prgRomHandlers, 0, 0x400);
 			}
 		}
+=======
+=======
+	for(int i = 0; i < 0x3F; i++) {
+		cpuMappings->RegisterHandler(i, i, 0x6000, 0x7FFF, this);
+		cpuMappings->RegisterHandler(i + 0x80, i + 0x80, 0x6000, 0x7FFF, this);
+>>>>>>> 721a6f68 (Update Gsu.cpp)
+>>>>>>> 64d089c6 (Update Gsu.cpp)
 	}
 
 	//GSU mappings
 	_mappings.RegisterHandler(0x00, 0x3F, 0x8000, 0xFFFF, prgRomHandlers);
 	_mappings.RegisterHandler(0x00, 0x3F, 0x0000, 0x7FFF, prgRomHandlers); //Mirror
 
+<<<<<<< HEAD
 	_mappings.RegisterHandler(0x40, _maxPrgRomBank, 0x0000, 0xFFFF, prgRomHandlers);
+=======
+	_mappings.RegisterHandler(0x40, 0x6F, 0x0000, 0xFFFF, prgRomHandlers);
+>>>>>>> 721a6f68 (Update Gsu.cpp)
 	_mappings.RegisterHandler(0x70, 0x71, 0x0000, 0xFFFF, _gsuRamHandlers);
 }
 
@@ -312,7 +325,11 @@ void Gsu::InitProgramCache(uint16_t cacheAddr)
 {
 	uint16_t dest = (cacheAddr & 0x01F0);
 
+<<<<<<< HEAD
 	if(_state.ProgramBank <= _maxPrgRomBank) {
+=======
+	if(_state.ProgramBank <= 0x6F) {
+>>>>>>> 721a6f68 (Update Gsu.cpp)
 		WaitRomOperation();
 		WaitForRomAccess();
 	} else {
